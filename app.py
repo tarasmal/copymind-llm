@@ -30,7 +30,8 @@ def generate_endpoint():
     data = request.get_json(force=True)
     situation = data.get("situation", "").strip()
     decision = data.get("decision", "").strip()
-    reasoning = data.get("reasoning", "").strip()
+    reasoning = data.get("reasoning")
+    reasoning = reasoning.strip() if reasoning else ""
 
     if not situation or not decision:
         return jsonify({"error": "situation and decision are required"}), 400
